@@ -28,7 +28,7 @@ function drawSquare(x, y, color) {
 
 let board = [];
 for (r = 0; r < ROW; r++) {
-  board[r] = [];
+  board[r] = []; 
   for (c = 0; c < COL; c++) {
     board[r][c] = VACANT;
   }
@@ -45,6 +45,21 @@ function drawBoard() {
 
 drawBoard();
 
+
+//piece colors 
+
+const PIECES = [
+    [Z, "red"],
+    [S, "yellow"],
+    [T, "green"],
+    [O, "blue"],
+    [L, "purple"],
+    [J, "orange"],
+];
+
+//iniate these pieces
+
+let p = new Piece (PIECES [0], [0], Pieces [0,1]);
 //object piece 
 
 function Piece(tetromino, color){
@@ -56,4 +71,7 @@ function Piece(tetromino, color){
 
     // must implement control of pieces 
 }
+
+// draw a piece to the board 
+
 
