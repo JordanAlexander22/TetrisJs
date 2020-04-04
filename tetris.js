@@ -58,7 +58,7 @@ const PIECES = [
 
 //iniate these pieces
 
-let p = new Piece(PIECES[0], [0], PIECES[0], [1]);
+let p = new Piece(PIECES[0][0], PIECES[0][1]);
 //object piece
 
 function Piece(tetromino, color) {
@@ -69,7 +69,7 @@ function Piece(tetromino, color) {
   this.activeTetromino = this.tetromino[this.tetrominoNum];
 
   // must implement control of pieces
-  this.x = 2;
+  this.x = 5;
   this.y = 4;
 }
 
