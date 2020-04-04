@@ -69,8 +69,8 @@ function Piece(tetromino, color) {
   this.activeTetromino = this.tetromino[this.tetrominoNum];
 
   // must implement control of pieces
-  this.x = 5;
-  this.y = 4;
+  this.x = 3;
+  this.y = 0;
 }
 
 // draw a piece to the board
@@ -85,5 +85,28 @@ Piece.prototype.draw = function() {
   }
 };
 
+// undraw a piece from the board 
 
-p.draw();
+
+
+// move down the piece 
+
+Piece.prototype.moveDown = function () {
+    this.y++;
+    this.draw();  
+}
+
+// piece gets dropped every second 
+
+let dropStart = Date.now();
+function drop () {
+    let now = Date.now();
+    let delta = now - dropStart;
+    if (delta > 1000) {
+        p.moveDown();
+        dropStart = Date.now();
+    }
+    requestAnimationFrame(drop);
+}
+
+//drop();
