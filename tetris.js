@@ -56,9 +56,14 @@ const PIECES = [
   [J, "orange"]
 ];
 
-//iniate these pieces
+//generate a random piece
 
-let p = new Piece(PIECES[0][0], PIECES[0][1]);
+function randomPiece() {
+  let r = Math.floor(Math.random()* PIECES.length) // will return numbers between 0-6
+  return new Piece(PIECES[r][0], PIECES[r][1])
+}
+
+let p = randomPiece()
 //object piece
 
 function Piece(tetromino, color) {
