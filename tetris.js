@@ -102,53 +102,90 @@ Piece.prototype.unDraw = function () {
 // move down the piece 
 
 Piece.prototype.moveDown = function () {
-    this.unDraw();
-    this.y++;
-    this.draw();  
+    if(!this.collision(0,1,this.activeTetromino)){
+      this.unDraw();
+      this.y++;
+      this.draw(); 
+    } else {
+      //locking the piece and generating new one
+
+    }
+   
 }
 
 
 // piece is able to move right
 Piece.prototype.moveRight = function () {
-  this.unDraw();
-  this.x++;
-  this.draw();  
+  if(!this.collision(1,0,this.activeTetromino)) {
+    this.unDraw();
+    this.x++;
+    this.draw(); 
+  } 
 }
 
 
 // piece is able to move left
 Piece.prototype.moveLeft = function () {
-  this.unDraw();
-  this.x--;
-  this.draw();  
+  if(!this.collision(-1,0,this.activeTetromino)) {
+    this.unDraw();
+    this.x--;
+    this.draw(); 
+  } 
 }
 
 
 // rotating the piece
 Piece.prototype.rotate = function () {
+  let nextPattern = this.tetromino[(this.tetrominoNum+1)%this.tetromino.length]
+  let kick = 0;
+
+  if (this.collision(0,0,nextPattern)) {
+    if(this.x > COL/2 ){
+      // right wall
+      kick = -1;
+    } else{
+      //left wall 
+      kick = 1
+    }
+  }
+
+  if(!this.collision(kick,0,nextPattern)) {
   this.unDraw();
+  this.x += kick;
   this.tetrominoNum= (this.tetrominoNum+1)%this.tetromino.length; // (0+1)%4= 4
   this.activeTetromino= this.tetromino[this.tetrominoNum]
   this.draw();  
+  } 
 }
 
 //collision detection 
-Piece.prototype.collision = function (x, y, piece) {
-  for (r = 0; r < this.piece.length; r++) {
-    for (c = 0; c < this.piece.length; c++) {
-      // if the square is empty then skip it 
-      if (!piece[r][c]) {
-        continue;
+Piece.prototype.collision = function(x,y,piece){
+  for( r = 0; r < piece.length; r++){
+      for(c = 0; c < piece.length; c++){
+          // if the square is empty, we skip it
+          if(!piece[r][c]){
+              continue;
+          }
+          // coordinates of the piece after movement
+          let newX = this.x + c + x;
+          let newY = this.y + r + y;
+          
+          // conditions
+          if(newX < 0 || newX >= COL || newY >= ROW){
+              return true;
+          }
+          // skip newY < 0; board[-1] will crush our game
+          if(newY < 0){
+              continue;
+          }
+          // check if there is a locked piece alrady in place
+          if( board[newY][newX] != VACANT){
+              return true;
+          }
       }
-      // need quardinates of piece post movement
-      let newX = this.x + c + x;
-      let newY = this.y + r + y;
-
-      //conditions
-    }
   }
-};
-
+  return false;
+}
 
 // Controlling the piece
 
@@ -183,4 +220,4 @@ function drop () {
     requestAnimationFrame(drop);
 }
 
-//drop();
+drop();
