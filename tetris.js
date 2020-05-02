@@ -133,7 +133,21 @@ Piece.prototype.rotate = function () {
 }
 
 //collision detection 
+Piece.prototype.collision = function (x, y, piece) {
+  for (r = 0; r < this.piece.length; r++) {
+    for (c = 0; c < this.piece.length; c++) {
+      // if the square is empty then skip it 
+      if (!piece[r][c]) {
+        continue;
+      }
+      // need quardinates of piece post movement
+      let newX = this.x + c + x;
+      let newY = this.y + r + y;
 
+      //conditions
+    }
+  }
+};
 
 
 // Controlling the piece
