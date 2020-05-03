@@ -64,6 +64,7 @@ function randomPiece() {
 }
 
 let p = randomPiece()
+
 //object piece
 
 function Piece(tetromino, color) {
@@ -75,33 +76,32 @@ function Piece(tetromino, color) {
 
   // must implement control of pieces
   this.x = 3;
-  this.y = 0;
+  this.y = -2;
+}
+
+// fill function 
+
+Piece.prototype.fill = function(color){
+  for( r = 0; r < this.activeTetromino.length; r++){
+      for(c = 0; c < this.activeTetromino.length; c++){
+          // we draw only occupied squares
+          if( this.activeTetromino[r][c]){
+              drawSquare(this.x + c,this.y + r, color);
+          }
+      }
+  }
 }
 
 // draw a piece to the board
 
-Piece.prototype.draw = function() {
-  for (r = 0; r < this.activeTetromino.length; r++) {
-    for (c = 0; c < this.activeTetromino.length; c++) {
-      //drawing only occupied squares
-      if (this.activeTetromino[r][c])
-        drawSquare(this.x + c, this.y + r, this.color);
-    }
-  }
-};
-
-// undraw a piece from the board 
-Piece.prototype.unDraw = function () {
-    for (r = 0; r < this.activeTetromino.length; r++) {
-        for (c = 0; c < this.activeTetromino.length; c++) {
-            if(this.activeTetromino[r][c]){
-                drawSquare(this.x + c, this.y + r, VACANT);
-            }
-        }
-    }
+Piece.prototype.draw = function(){
+  this.fill(this.color);
 }
 
-
+// undraw a piece from the board 
+Piece.prototype.unDraw = function(){
+  this.fill(VACANT);
+}
 
 
 // move down the piece 
@@ -113,11 +113,12 @@ Piece.prototype.moveDown = function () {
       this.draw(); 
     } else {
       //locking the piece and generating new one
-
+      this.lock();
+      p = randomPiece();
     }
    
 }
-
+drawBoard()
 
 // piece is able to move right
 Piece.prototype.moveRight = function () {
@@ -162,6 +163,27 @@ Piece.prototype.rotate = function () {
   this.draw();  
   } 
 }
+
+Piece.prototype.lock = function(){
+  for (r = 0; r < this.activeTetromino.length; r++) {
+    for (c = 0; c < this.activeTetromino.length; c++) {
+      //need to skip the vacant square
+      if (!this.activeTetromino[r][c]){
+        continue;
+    }
+      //lock on top results in loss
+      if(this.y + r < 0){
+        alert('game over!!');
+        // stop the animations
+        gameOver= true;
+        break;
+      }
+      // lock the piece
+      board[this.y + r][this.x + c] = this.color;
+  }
+}
+}
+
 
 //collision detection 
 Piece.prototype.collision = function(x,y,piece){
@@ -215,6 +237,7 @@ function CONTROL (event) {
 
 // piece gets dropped every second 
 let dropStart = Date.now();
+let gameOver = false;
 function drop () {
     let now = Date.now();
     let delta = now - dropStart;
@@ -222,7 +245,9 @@ function drop () {
         p.moveDown();
         dropStart = Date.now();
     }
-    requestAnimationFrame(drop);
+    if(!gameOver){
+      requestAnimationFrame(drop);
+    } 
 }
 
 drop();
