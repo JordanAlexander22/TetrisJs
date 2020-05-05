@@ -1,5 +1,6 @@
 const cvs = document.getElementById("Tetris");
 const ctx = cvs.getContext("2d");
+const scoreElement = document.getElementById("score")
 
 const ROW = 20;
 const COL = (COLUMN = 10);
@@ -205,6 +206,7 @@ for (r= 0; r< ROW; r++){
   }
   //score updating
   drawBoard();
+  scoreElement.innerHTML = score;
 
 }
 
@@ -274,3 +276,4 @@ function drop () {
 }
 
 drop();
+console.log(score)
