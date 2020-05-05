@@ -164,9 +164,10 @@ Piece.prototype.rotate = function () {
   } 
 }
 
+let score = 0;
 Piece.prototype.lock = function(){
-  for (r = 0; r < this.activeTetromino.length; r++) {
-    for (c = 0; c < this.activeTetromino.length; c++) {
+  for (r = 0; r < this.activeTetromino.length; r++){
+    for (c = 0; c < this.activeTetromino.length; c++){
       //need to skip the vacant square
       if (!this.activeTetromino[r][c]){
         continue;
@@ -182,8 +183,30 @@ Piece.prototype.lock = function(){
       board[this.y + r][this.x + c] = this.color;
   }
 }
-}
+//removing rows
+for (r= 0; r< ROW; r++){
+  let IsRowFull = true;
+  for (c= 0; c<COL; c++){
+    IsRowFull = IsRowFull && (board[r][c] != VACANT);
+  }
+  if(IsRowFull){
+    // if the row is full be sure to move rows above it 
+    for(y=r; y>1; y--){
+      for(c=0; c<COL; c++){
+        board[y][c] = board[y-1][c];
+      }
+    }
+    for(c=0; c<COL; c++){
+      board[0][c] = VACANT;
+    }
+    //need to increment score
+    score +=10;
+  }
+  }
+  //score updating
+  drawBoard();
 
+}
 
 //collision detection 
 Piece.prototype.collision = function(x,y,piece){
