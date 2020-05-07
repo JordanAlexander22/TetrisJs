@@ -3,9 +3,15 @@ body{
 }
 
 
+.Tetris {
+    outline:20px solid black !important;
+}
+
+
+
 .gameView{
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Bangers';
 }
 
 
@@ -13,7 +19,7 @@ body{
  #score{
     color:black;
     text-align: center;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Bangers';
     font-size: 2rem;
 }
 
