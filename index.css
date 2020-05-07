@@ -1,0 +1,24 @@
+body{
+    background: radial-gradient(80% 40%, #3366ff,#6600cc);
+}
+
+
+.gameView{
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+ #score{
+    color:black;
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+}
+
+.gameView canvas {
+    margin: 0 auto;
+    display:block;
+    padding: 20px;
+}
