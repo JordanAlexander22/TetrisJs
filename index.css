@@ -26,7 +26,7 @@ body{
 .gameView canvas {
     margin: 0 auto;
     display:block;
-    padding: 20px;
+    border: 2.5px solid black
 }
 
 .game-over {
@@ -39,6 +39,8 @@ body{
     border-radius: 10px;
     text-align: center;
     animation: pop-in 1s;
+    left: 38%;
+    margin-top: 10%;
   }
   
   .btn {
@@ -54,4 +56,10 @@ body{
     );
     padding: 10px 40px;
     font: 14px sans-serif;
+  }
+
+  .wrap {
+    display: flex;
+    flex-direction: column;
+    height: -120%;
   }
