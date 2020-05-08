@@ -55,11 +55,18 @@ body{
       #eee 100%
     );
     padding: 10px 40px;
-    font: 14px sans-serif;
+    font: 14px 'Bangers';
   }
 
   .wrap {
     display: flex;
     flex-direction: column;
     height: -120%;
+  }
+
+  span{
+    color:black;
+    text-align: center;
+    font-family: 'Bangers';
+    font-size: 2rem;
   }
