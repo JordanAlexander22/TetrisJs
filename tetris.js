@@ -175,7 +175,7 @@ Piece.prototype.lock = function(){
     }
       //lock on top results in loss
       if(this.y + r < 0){
-        alert('game over!!');
+        document.querySelector(".game-over").style.display = "block";;
         // stop the animations
         gameOver= true;
         break;

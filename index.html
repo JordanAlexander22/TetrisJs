@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
        <title> Tetris Javascript</title>
        <link href="index.css" rel="stylesheet" type="text/css"> <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
@@ -11,6 +12,11 @@
         Score: <div id= "score">0</div>
     </div>
     </div>
+    <div class="game-over">
+        <h1>GAME OVER</h1>
+        <h2>You lost the game</h2>
+        <button class="btn" onclick="window.location.reload()">Restart</button>
+      </div>
     <script src= "tetrominoes.js"></script>
     <script src= "tetris.js"></script>
 </body>
